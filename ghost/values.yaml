@@ -1,0 +1,19 @@
+ghostBlogTitle: "My Ghost Blog"
+ghostUsername: "ghostadmin"
+ghostEmail: "admin@example.com"
+
+existingSecret: "ghost-credentials"
+
+persistence:
+  enabled: true
+  storageClass: efs-sc
+  accessModes:
+    - ReadWriteMany
+  size: 10Gi
+
+service:
+  type: NodePort
+  ports:
+    http: 80
+  nodePorts:
+    http: 30080
