@@ -12,8 +12,4 @@ persistence:
   size: 10Gi
 
 service:
-  type: NodePort
-  ports:
-    http: 80
-  nodePorts:
-    http: 30080
+  type: LoadBalancer

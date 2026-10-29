@@ -10,7 +10,7 @@ spec:
     - group: rbac.authorization.k8s.io
       kind: ClusterRoleBinding
     - group: apiextensions.k8s.io
-      kind: CustomResourceDefinition  # Allow CRD resources
+      kind: CustomResourceDefinition
   description: Ghost Blog project
   destinations:
     - name: '*'
@@ -19,6 +19,6 @@ spec:
   roles:
     - name: deploy-app
       groups:
-        - my-org:developers  # Replace with your actual OIDC/Kubernetes group name if needed
+        - system:authenticated
   sourceRepos:
     - '*'
