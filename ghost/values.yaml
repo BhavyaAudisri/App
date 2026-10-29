@@ -1,15 +1,57 @@
-ghostBlogTitle: "My Ghost Blog"
-ghostUsername: "ghostadmin"
-ghostEmail: "admin@example.com"
 
-existingSecret: "ghost-credentials"
+# Bitnami Ghost Helm chart: 25.0.4
+# Ghost application version: 6.0.5
 
-persistence:
-  enabled: true
-  storageClass: efs-sc
-  accessModes:
-    - ReadWriteMany
-  size: 10Gi
+# Ghost administrator configuration
+ghostUsername: admin
+ghostPassword: "admin123456"
+ghostEmail: admin@example.com
+ghostBlogTitle: My Ghost Blog
 
+# Configure your public hostname when available
+ghostHost: ""
+ghostPath: /
+ghostEnableHttps: false
+
+# Kubernetes Service
 service:
   type: LoadBalancer
+  ports:
+    http: 80
+    https: 443
+  externalTrafficPolicy: Cluster
+
+# Ingress (disabled initially)
+ingress:
+  enabled: false
+  hostname: ghost.local
+  path: /
+  pathType: Prefix
+  tls: false
+
+# Ghost content persistence
+persistence:
+  enabled: true
+  storageClass: ""
+  accessModes:
+    - ReadWriteOnce
+  size: 8Gi
+
+# MySQL database
+mysql:
+  enabled: true
+  architecture: standalone
+  auth:
+    database: bitnami_ghost
+    username: bn_ghost
+    password: "admin123@"
+    rootPassword: "admin123456@"
+    existingSecret: ""
+  primary:
+    persistence:
+      enabled: true
+      storageClass: ""
+      accessModes:
+        - ReadWriteOnce
+      size: 8Gi
+
