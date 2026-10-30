@@ -2,13 +2,22 @@
 # Bitnami Ghost Helm chart: 25.0.4
 # Ghost application version: 6.0.5
 
+# Allow legacy Bitnami image repositories
+global:
+  security:
+    allowInsecureImages: true
+
+# Ghost container image
+image:
+  repository: bitnamilegacy/ghost
+
 # Ghost administrator configuration
 ghostUsername: admin
 ghostPassword: "admin123456"
 ghostEmail: admin@example.com
 ghostBlogTitle: My Ghost Blog
 
-# Configure your public hostname when available
+# Public hostname configuration
 ghostHost: ""
 ghostPath: /
 ghostEnableHttps: false
@@ -21,7 +30,7 @@ service:
     https: 443
   externalTrafficPolicy: Cluster
 
-# Ingress (disabled initially)
+# Ingress
 ingress:
   enabled: false
   hostname: ghost.local
@@ -32,7 +41,7 @@ ingress:
 # Ghost content persistence
 persistence:
   enabled: true
-  storageClass: "ebs-sc"
+  storageClass: ebs-sc
   accessModes:
     - ReadWriteOnce
   size: 8Gi
@@ -41,17 +50,21 @@ persistence:
 mysql:
   enabled: true
   architecture: standalone
+
+  image:
+    repository: bitnamilegacy/mysql
+
   auth:
     database: bitnami_ghost
     username: bn_ghost
     password: "admin123@"
     rootPassword: "admin123456@"
     existingSecret: ""
+
   primary:
     persistence:
       enabled: true
-      storageClass: "ebs-sc"
+      storageClass: ebs-sc
       accessModes:
         - ReadWriteOnce
       size: 8Gi
-
