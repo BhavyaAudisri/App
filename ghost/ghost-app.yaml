@@ -1,3 +1,4 @@
+
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -5,17 +6,27 @@ metadata:
   namespace: argocd
 spec:
   project: deploy
-  source:
-    repoURL: 'https://github.com/BhavyaAudisri/App.git'
-    targetRevision: main 
-    path: ghost
-    helm:
-      valueFiles:
-        - values.yaml
+
+  sources:
+    - repoURL: https://charts.bitnami.com/bitnami
+      chart: ghost
+      targetRevision: 25.0.4
+      helm:
+        releaseName: ghost
+        valueFiles:
+          - $values/ghost/values.yaml
+
+    - repoURL: https://github.com/BhavyaAudisri/App.git
+      targetRevision: main
+      ref: values
+
   destination:
     server: https://kubernetes.default.svc
     namespace: app
+
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
