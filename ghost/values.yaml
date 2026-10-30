@@ -32,7 +32,7 @@ ingress:
 # Ghost content persistence
 persistence:
   enabled: true
-  storageClass: ""
+  storageClass: "ebs-sc"
   accessModes:
     - ReadWriteOnce
   size: 8Gi
@@ -50,7 +50,7 @@ mysql:
   primary:
     persistence:
       enabled: true
-      storageClass: ""
+      storageClass: "ebs-sc"
       accessModes:
         - ReadWriteOnce
       size: 8Gi
