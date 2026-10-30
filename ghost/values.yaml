@@ -3,6 +3,10 @@
 # Ghost application version: 6.0.5
 
 # Allow legacy Bitnami image repositories
+replicaCount: 1
+
+diagnosticMode:
+  enabled: false
 global:
   security:
     allowInsecureImages: true
@@ -18,7 +22,7 @@ ghostEmail: admin@example.com
 ghostBlogTitle: My Ghost Blog
 
 # Public hostname configuration
-ghostHost: ""
+ghostHost: "a38e37809646942c797bf667d143fde4-1941193545.us-east-1.elb.amazonaws.com"
 ghostPath: /
 ghostEnableHttps: false
 
