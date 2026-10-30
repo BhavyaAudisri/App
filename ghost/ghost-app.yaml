@@ -6,8 +6,8 @@ metadata:
 spec:
   project: deploy
   source:
-    repoURL: 'https://github.com/gesselsam96/sre-project.git'
-    targetRevision: master
+    repoURL: 'https://github.com/BhavyaAudisri/App.git'
+    targetRevision: main 
     path: ghost
     helm:
       valueFiles:
